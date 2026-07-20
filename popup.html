@@ -1,0 +1,192 @@
+﻿<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vatican Autofill</title>
+  <style>
+    :root {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #202124;
+      background: #fff;
+    }
+
+    body {
+      width: 330px;
+      margin: 0;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+
+    .field {
+      display: grid;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #b8b8b8;
+      border-radius: 6px;
+      padding: 9px 10px;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 118px;
+      resize: vertical;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.35;
+    }
+
+    .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin: 10px 0;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .check input {
+      margin-top: 2px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #fill {
+      background: #1a73e8;
+      color: #fff;
+    }
+
+    #save {
+      background: #e8eaed;
+      color: #202124;
+    }
+
+    #status {
+      min-height: 18px;
+      margin: 12px 0 0;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .note {
+      margin: 12px 0 0;
+      font-size: 11px;
+      line-height: 1.4;
+      color: #5f6368;
+    }
+  </style>
+</head>
+<body>
+  <h1>Checkout Musei Vaticani</h1>
+
+  <div class="field">
+    <label for="gender">Sesso</label>
+    <select id="gender">
+      <option value="Maschio">Maschio</option>
+      <option value="Femmina">Femmina</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="country">Paese</label>
+    <input id="country" type="text" value="Italia">
+  </div>
+
+  <div class="field">
+    <label for="language">Lingua</label>
+    <input id="language" type="text" value="Italiano">
+  </div>
+
+  <div class="field">
+    <label for="city">CittÃ </label>
+    <input id="city" type="text" value="ROMA">
+  </div>
+
+  <div class="field">
+    <label for="birthDate">Data di nascita</label>
+    <input id="birthDate" type="date" value="1977-07-19">
+  </div>
+
+  <div class="field">
+    <label for="email">Email</label>
+    <input id="email" type="email" value="crazy4rometour@gmail.com">
+  </div>
+
+  <div class="field">
+    <label for="phone">Telefono</label>
+    <input id="phone" type="tel" value="3341832713">
+  </div>
+
+  <div class="field">
+    <label for="participantsText">Partecipanti</label>
+    <textarea id="participantsText" spellcheck="false" placeholder="Incolla qui i partecipanti. Non viene salvato.
+Esempi:
+Traveler 1: First Name: Brian Last Name: Hansen Date of Birth: 1963-07-10
+Marcio Lopes - 25/10/1978"></textarea>
+  </div>
+
+  <label class="check">
+    <input id="marketing" type="checkbox" checked>
+    <span>Accetta l'invio di informazioni via email</span>
+  </label>
+
+  <label class="check">
+    <input id="terms" type="checkbox" checked>
+    <span>Accetta le norme generali di acquisto per ultimo</span>
+  </label>
+
+  <label class="check">
+    <input id="waitCloudflare" type="checkbox" checked>
+    <span>Attendi il completamento manuale di Cloudflare prima di compilare</span>
+  </label>
+
+  <div class="buttons">
+    <button id="fill" type="button">Compila checkout</button>
+    <button id="save" type="button">Salva</button>
+  </div>
+
+  <div class="buttons">
+    <button id="downloadLog" type="button">Scarica log</button>
+  </div>
+
+  <p id="status" role="status"></p>
+  <p class="note">
+    L'estensione non invia il modulo e non completa automaticamente Cloudflare.
+  </p>
+
+  <script src="popup.js"></script>
+</body>
+</html>
+

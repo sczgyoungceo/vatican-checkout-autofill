@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Vatican Checkout Autofill",
+  "version": "1.0.0",
+  "description": "Compila i dati ricorrenti nel checkout ufficiale dei Musei Vaticani.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://tickets.museivaticani.va/*"
+  ],
+  "action": {
+    "default_title": "Compila checkout Musei Vaticani",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://tickets.museivaticani.va/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

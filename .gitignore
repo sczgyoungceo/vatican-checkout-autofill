@@ -1,0 +1,12 @@
+﻿# Local diagnostics and generated logs
+vatican-autofill-log-*.json
+*.log
+
+# Local agent/tool state
+.agents/
+.codex/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
