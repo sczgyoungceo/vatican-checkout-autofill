@@ -561,12 +561,18 @@
   }
 
   function parseParticipantLine(line) {
+    const summaryLinePattern = /^\s*\d+\s*(?:pax|people|persons?|partecipanti?|adults?|guests?)\s*$/i;
+    if (summaryLinePattern.test(String(line))) return null;
+
     let cleaned = String(line)
+      .replace(/&nbsp;|&#(?:x[0-9a-f]+|\d+);/gi, " ")
       .replace(/^\s*\d+\s*[).:-]\s*/, "")
-      .replace(/\([^)]*\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[^)]*\)/gi, "")
-      .replace(/\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\s+\d{1,2},?\s+\d{4}\b/gi, "")
+      .replace(/\b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\.?\s+\d{1,2}(?:st|nd|rd|th)?,?\s+\d{2,4}\b/gi, "")
+      .replace(/\b\d{1,2}(?:st|nd|rd|th)?\s+(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\.?\s+\d{2,4}\b/gi, "")
       .replace(/\b\d{4}-\d{2}-\d{2}\b/g, "")
-      .replace(/\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b/g, "")
+      .replace(/\b\d{1,2}[\/\\-]\d{1,2}[\/\\-]\d{2,4}\b/g, "")
+      .replace(/\((?:disabil(?:e|ity)|disabled|assistente|assistant|companion|accompagnatore|carer)\)/gi, " ")
+      .replace(/\b(?:disabil(?:e|ity)|disabled|assistente|assistant|companion|accompagnatore|carer)\b/gi, " ")
       .replace(/[\s-]+$/g, "")
       .trim();
 
@@ -583,9 +589,21 @@
     const parts = cleaned.split(/\s+/).filter(Boolean);
     if (parts.length < 2) return null;
 
+    const surnameParticles = new Set([
+      "al", "bin", "da", "dal", "dalla", "de", "degli", "dei", "del", "della",
+      "den", "der", "di", "dos", "du", "el", "la", "le", "st", "van", "von"
+    ]);
+    let surnameStart = parts.length - 1;
+
+    while (surnameStart > 1) {
+      const previousPart = parts[surnameStart - 1].replace(/[.'’-]/g, "").toLowerCase();
+      if (!surnameParticles.has(previousPart)) break;
+      surnameStart -= 1;
+    }
+
     return {
-      firstName: cleanPersonName(parts.slice(0, -1).join(" ")),
-      lastName: cleanPersonName(parts.at(-1))
+      firstName: cleanPersonName(parts.slice(0, surnameStart).join(" ")),
+      lastName: cleanPersonName(parts.slice(surnameStart).join(" "))
     };
   }
 
@@ -1197,7 +1215,5 @@
     }
   }
 })();
-
-
 
 

@@ -18,11 +18,85 @@ https://tickets.museivaticani.va/home/checkout
 
 1. Arriva alla pagina checkout dei Musei Vaticani.
 2. Premi l'icona dell'estensione.
-3. Verifica o modifica i dati.
-4. Premi **Compila checkout**.
-5. Se compare Cloudflare, completalo manualmente.
-6. L'estensione prosegue appena rileva il token di verifica.
-7. Controlla sempre i dati prima di proseguire con l'acquisto.
+3. Verifica o modifica i dati del referente.
+4. Scrivi o incolla nel campo **Partecipanti** il testo.
+5. Premi **Compila checkout**.
+6. Se compare Cloudflare, completalo manualmente.
+7. L'estensione prosegue appena rileva il token di verifica.
+8. Compila nome e cognome del referente usando il primo partecipante e poi
+   compila tutti i partecipanti presenti nel checkout.
+9. Seleziona i consensi richiesti senza inviare il modulo.
+10. Controlla sempre i dati prima di proseguire con l'acquisto.
+
+## Formato dei partecipanti
+
+Il testo può essere copiato direttamente dal gestionale e incollato nella
+textarea **Partecipanti**, senza dover eliminare manualmente date, righe vuote o
+annotazioni.
+
+Formato tipico supportato:
+
+```text
+4 pax
+Donna Renaud July 2 1970
+Pat Renaud Oct 19 1962
+Gordon Anderson July 14 1945 disabile
+Karen Anderson Mar 29, 1945 assistente
+```
+
+Sono supportate anche date numeriche con barra normale, barra rovesciata o
+trattino:
+
+```text
+merola, mario 12\02\1996
+Manarin, Catherine 3/18/1960
+Mario Rossi 1996-02-12
+```
+
+Le date vengono riconosciute e rimosse automaticamente. Sono ignorate anche:
+
+- righe riepilogative come `4 pax`;
+- righe vuote;
+- entità HTML come `&#x20;` e `&nbsp;`;
+- indicazioni come `disabile`, `disability`, `disabled`, `assistente`,
+  `assistant`, `companion`, `accompagnatore` e `carer`.
+
+È possibile usare questi formati:
+
+```text
+Nome Cognome
+Cognome, Nome
+Traveler 1: First Name: Nome Last Name: Cognome Date of Birth: 1996-02-12
+```
+
+Per nomi composti, tutte le parole prima del cognome vengono inserite nel campo
+Nome:
+
+```text
+Danielle Nicole Moumos
+```
+
+diventa `Nome: Danielle Nicole` e `Cognome: Moumos`.
+
+Le particelle più comuni dei cognomi composti vengono riconosciute:
+
+```text
+Luca De Angelis
+```
+
+diventa `Nome: Luca` e `Cognome: De Angelis`.
+
+Quando nome e cognome potrebbero essere ambigui, usare il formato più sicuro
+`Cognome, Nome`:
+
+```text
+Di Maria, Maria Teresa
+D'Amico, Nicolò
+```
+
+La prima persona riconosciuta viene usata anche come referente della
+prenotazione. Il contenuto della textarea non viene conservato quando si preme
+**Salva**; deve essere incollato per ogni nuova prenotazione.
 
 ## Comportamento dei checkbox
 
