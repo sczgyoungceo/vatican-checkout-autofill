@@ -38,10 +38,10 @@ Formato tipico supportato:
 
 ```text
 4 pax
-Donna Renaud July 2 1970
-Pat Renaud Oct 19 1962
-Gordon Anderson July 14 1945 disabile
-Karen Anderson Mar 29, 1945 assistente
+Luca marzo July 2 1970
+Marco Blu Oct 19 1962
+giulio rossi July 14 1945 disabile
+marco verdi Mar 29, 1945 assistente
 ```
 
 Sono supportate anche date numeriche con barra normale, barra rovesciata o
@@ -49,7 +49,7 @@ trattino:
 
 ```text
 merola, mario 12\02\1996
-Manarin, Catherine 3/18/1960
+Manarin, Jhon 3/18/1960
 Mario Rossi 1996-02-12
 ```
 
@@ -73,10 +73,10 @@ Per nomi composti, tutte le parole prima del cognome vengono inserite nel campo
 Nome:
 
 ```text
-Danielle Nicole Moumos
+daniele Nicola munoz
 ```
 
-diventa `Nome: Danielle Nicole` e `Cognome: Moumos`.
+diventa `Nome: daniele Nicola` e `Cognome: munoz`.
 
 Le particelle più comuni dei cognomi composti vengono riconosciute:
 
